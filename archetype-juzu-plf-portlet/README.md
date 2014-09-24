@@ -6,7 +6,7 @@ An maven archetype which contains a sample Juzu Portlet compatible working with 
 ## Usage
 
 Creating a project from this archetype by specifying archetypeGroupId, archetypeArtifactId and archetypeVersion information.
-For example, we are create a project:
+For example, we create a project:
 
 ```
 mvn archetype:generate \
@@ -36,3 +36,8 @@ mvn archetype:generate \
 ```
 
 Valid juzuInject values are guice, spring or cdi. If it's omitted, guice will be used by default.
+
+
+## TODOs
+- Rename archetype to archetype-juzu-exoplf-portlet ?
+- Provide an option to use eXo Kernel Service Provider

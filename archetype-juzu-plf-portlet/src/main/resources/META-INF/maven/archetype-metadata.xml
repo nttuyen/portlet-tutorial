@@ -1,9 +1,6 @@
 <archetype-descriptor name="juzu.archetype">
 
   <requiredProperties>
-    <requiredProperty key="juzuServer">
-      <defaultValue>servlet</defaultValue>
-    </requiredProperty>
     <requiredProperty key="juzuInject">
       <defaultValue>guice</defaultValue>
     </requiredProperty>
