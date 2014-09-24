@@ -5,7 +5,7 @@ An maven archetype which contains a sample Juzu Portlet compatible working with 
 
 ## Usage
 
-Creating a project from this archetype by specifying archetypeGroupId, archetypeArtifactId and archetypeVersion information.
+Creating a project from this archetype by specifying `archetypeGroupId`, `archetypeArtifactId` and `archetypeVersion` information.
 For example, we create a project:
 
 ```
@@ -20,7 +20,7 @@ mvn archetype:generate \
     -DinteractiveMode=false
 ```
 
-You can also specify the injection container with -DjuzuInject option, for instance:
+You can also specify the injection container with *-DjuzuInject* option, for instance:
 
 ```
 mvn archetype:generate \
@@ -35,7 +35,7 @@ mvn archetype:generate \
     -DinteractiveMode=false
 ```
 
-Valid juzuInject values are guice, spring or cdi. If it's omitted, guice will be used by default.
+Valid `juzuInject` values are *guice*, *spring* or *cdi*. If it's omitted, *guice* will be used by default.
 
 
 ## TODOs
