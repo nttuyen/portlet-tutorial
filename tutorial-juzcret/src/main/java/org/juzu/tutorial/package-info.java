@@ -14,6 +14,5 @@
  * limitations under the License.
  */
 
-@juzu.Application
-@juzu.plugin.servlet.Servlet(value = "/")
+@juzu.Application(defaultController = org.juzu.tutorial.JuZcretApplication.class)
 package org.juzu.tutorial;
