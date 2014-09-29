@@ -15,20 +15,42 @@
  */
 package org.juzu.tutorial.models;
 
-import java.io.Serializable;
-import java.util.Date;
+import java.util.LinkedList;
+import java.util.List;
 
-public class Secret implements Serializable {
+public class Secret extends Model {
 
   private static final long serialVersionUID = 9216333356065206889L;
 
   private String message;
 
   private String imageURL;
-
-  private Date   createdDate;
+  
+  private List<String> likes;
+  
+  private List<Comment> comments;
 
   public Secret() {
+    likes = new LinkedList<String>();    
+    comments = new LinkedList<Comment>();
+  }
+
+  public List<String> getLikes() {
+    List<String> lks = new LinkedList<String>(likes);
+    return lks;
+  }
+
+  public void setLikes(List<String> likes) {
+    this.likes = likes;
+  }
+
+  public List<Comment> getComments() {
+    List<Comment> cms = new LinkedList<Comment>(comments);
+    return cms;
+  }
+
+  public void setComments(List<Comment> comments) {
+    this.comments = comments;
   }
 
   public String getMessage() {
@@ -45,13 +67,5 @@ public class Secret implements Serializable {
 
   public void setImageURL(String imageURL) {
     this.imageURL = imageURL;
-  }
-
-  public Date getCreatedDate() {
-    return createdDate;
-  }
-
-  public void setCreatedDate(Date createdDate) {
-    this.createdDate = createdDate;
   }
 }

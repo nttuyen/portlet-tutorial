@@ -1,5 +1,5 @@
 /*
- * Copyright 2013 eXo Platform SAS
+ * Copyright 2014 eXo Platform SAS
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,25 +13,33 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
-package org.juzu.tutorial.services;
-
-import java.util.List;
-
-import org.juzu.tutorial.models.Comment;
-import org.juzu.tutorial.models.Secret;
-
-/**
- * Created by The eXo Platform SAS Author : Thibault Clement
- * tclement@exoplatform.com 9/6/14
- */
-public interface SecretService {
-
-  public List<Secret> getSecrets();
-
-  public void addSecret(String message, String imageUrl);  
   
-  public Comment addComment(String secretId, Comment comment);
+package org.juzu.tutorial.models;
+
+import java.io.Serializable;
+import java.util.Date;
+
+public class Model implements Serializable {
+
+  private static final long serialVersionUID = 4079920077011600540L;
+
+  private String id;
   
-  public List<String> addLike(String secretId, String userId);
+  private Date createdDate;
+
+  public String getId() {
+    return id;
+  }
+
+  public void setId(String id) {
+    this.id = id;
+  }
+
+  public Date getCreatedDate() {
+    return (Date)createdDate.clone();
+  }
+
+  public void setCreatedDate(Date createdDate) {
+    this.createdDate = createdDate;
+  }
 }
