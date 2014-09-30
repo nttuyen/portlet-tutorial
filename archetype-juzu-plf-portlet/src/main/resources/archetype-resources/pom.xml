@@ -35,7 +35,6 @@
       <groupId>org.codehaus.groovy</groupId>
       <artifactId>groovy-all</artifactId>
       <version>${groovy.version}</version>
-      <scope>provided</scope>
     </dependency>
 
     <!-- Servlet 3.x API -->
