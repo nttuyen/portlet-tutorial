@@ -17,9 +17,14 @@
 package org.juzu.tutorial;
 
 import javax.inject.Inject;
+import javax.portlet.PortletMode;
+import javax.portlet.PortletPreferences;
+import javax.portlet.ReadOnlyException;
+import javax.portlet.ValidatorException;
 import javax.validation.ConstraintViolation;
 import javax.validation.Valid;
 
+import java.io.IOException;
 import java.security.Principal;
 import java.util.List;
 import java.util.Set;
@@ -30,6 +35,7 @@ import juzu.Path;
 import juzu.Resource;
 import juzu.Response;
 import juzu.View;
+import juzu.bridge.portlet.JuzuPortlet;
 import juzu.plugin.ajax.Ajax;
 import juzu.plugin.validation.ValidationError;
 import juzu.request.RequestContext;
@@ -44,19 +50,33 @@ import org.juzu.tutorial.services.SecretService;
 public class JuZcretApplication implements RequestLifeCycle {
 
   @Inject
-   SecretService secretService;
+  PortletPreferences prefs;
+  
+  @Inject
+  SecretService secretService;
 
   @Inject
   @Path("secretWall.gtmpl")
-   org.juzu.tutorial.templates.secretWall secretWall;
+  org.juzu.tutorial.templates.secretWall secretWall;
   
   @Inject
   @Path("addSecret.gtmpl")
-   org.juzu.tutorial.templates.addSecret addSecret;
+  org.juzu.tutorial.templates.addSecret addSecret;
+  
+  @Inject
+  @Path("editMode.gtmpl")
+  org.juzu.tutorial.templates.editMode editMode;
+  
+  public static final String ENABLE_COMMENT = "enableComment";
 
   @View
-  public Response.Content index() {
-      return secretWall.with().secretsList(secretService.getSecrets()).ok();
+  public Response.Content index(RequestContext context) {
+    boolean enableComment = Boolean.parseBoolean(prefs.getValue(ENABLE_COMMENT, "false"));
+    if (PortletMode.EDIT.equals(context.getProperty(JuzuPortlet.PORTLET_MODE))) {
+      return editMode.with().enableComment(enableComment).ok();
+    } else {
+      return secretWall.with().enableComment(enableComment).secretsList(secretService.getSecrets()).ok();        
+    }
    }
   
   @View
@@ -91,9 +111,19 @@ public class JuZcretApplication implements RequestLifeCycle {
   
   @Action
   public Response.View addSecret(String msg, String imgURL) {
-       secretService.addSecret(msg, imgURL);
+      secretService.addSecret(msg, imgURL);
       return JuZcretApplication_.index();
-   }
+  }
+  
+  @Action
+  public Response.View enableComment(String enableComment) throws ReadOnlyException, ValidatorException, IOException {
+    if ("on".equals(enableComment)) {
+      enableComment = "true";
+    }
+    prefs.setValue(ENABLE_COMMENT, enableComment);
+    prefs.store();
+    return JuZcretApplication_.index().with(JuzuPortlet.PORTLET_MODE, PortletMode.VIEW);
+  }
   
   @Override
   public void endRequest(RequestContext context) {

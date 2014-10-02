@@ -20,7 +20,7 @@
 @Scripts(
    {
        @Script(id = "jquery", value = "jquery/1.10.2/jquery.js"),
-       @Script(value = "javascripts/secret.js", depends = "juzu.ajax")
+       @Script(value = "javascripts/secret.js", depends = "jquery")
      }
  )
 @Assets("*")
