@@ -15,8 +15,10 @@
  */
 package org.juzu.tutorial.models;
 
+import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Set;
 
 public class Secret extends Model {
 
@@ -26,21 +28,21 @@ public class Secret extends Model {
 
   private String imageURL;
   
-  private List<String> likes;
+  private Set<String> likes;
   
   private List<Comment> comments;
 
   public Secret() {
-    likes = new LinkedList<String>();    
+    likes = new HashSet<String>();    
     comments = new LinkedList<Comment>();
   }
 
-  public List<String> getLikes() {
-    List<String> lks = new LinkedList<String>(likes);
+  public Set<String> getLikes() {
+    Set<String> lks = new HashSet<String>(likes);
     return lks;
   }
 
-  public void setLikes(List<String> likes) {
+  public void setLikes(Set<String> likes) {
     this.likes = likes;
   }
 

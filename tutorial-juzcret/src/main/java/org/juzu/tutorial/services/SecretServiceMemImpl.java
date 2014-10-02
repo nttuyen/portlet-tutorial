@@ -21,6 +21,7 @@ import javax.inject.Singleton;
 import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Set;
 import java.util.UUID;
 
 import org.juzu.tutorial.models.Comment;
@@ -66,13 +67,11 @@ public class SecretServiceMemImpl implements SecretService {
     return comment;
   }
 
-  public List<String> addLike(String secretId, String userId) {
+  public Set<String> addLike(String secretId, String userId) {
     Secret secret = getSecret(secretId);
     if (secret != null) {
-      List<String> likes = secret.getLikes();
-      if (!likes.contains(userId)) {
-        likes.add(userId);
-      }
+      Set<String> likes = secret.getLikes();
+      likes.add(userId);
       secret.setLikes(likes);
       return likes;
     }

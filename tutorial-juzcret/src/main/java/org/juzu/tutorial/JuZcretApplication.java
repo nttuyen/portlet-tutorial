@@ -101,7 +101,7 @@ public class JuZcretApplication implements RequestLifeCycle {
   @Resource
   public Response addLike(String secretId, SecurityContext context) {
     Principal user = context.getUserPrincipal();
-    List<String> likes = secretService.addLike(secretId, user.getName());
+    Set<String> likes = secretService.addLike(secretId, user.getName());
     if (likes != null) {
       return Response.ok(new JSONArray(likes).toString()).withMimeType("text/json");
     } else {
