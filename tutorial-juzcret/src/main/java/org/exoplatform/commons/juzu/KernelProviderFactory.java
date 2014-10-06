@@ -35,7 +35,7 @@ public class KernelProviderFactory implements ProviderFactory {
   public <T> Provider<? extends T> getProvider(final Class<T> implementationType) throws Exception {
       final PortalContainer container = PortalContainer.getInstance();
       if (container == null) {
-          throw new IllegalStateException("Not running in the context of a portal container");
+          return null;
       }
       final ComponentAdapter adapter = container.getComponentAdapterOfType(implementationType);
       if (adapter != null) {

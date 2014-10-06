@@ -78,6 +78,12 @@
                 </exclusion>
             </exclusions>
         </dependency>
+        <dependency>
+          <groupId>org.exoplatform.jcr</groupId>
+          <artifactId>exo.jcr.component.ext</artifactId>
+          <version>1.15.x-SNAPSHOT</version>
+          <scope>provided</scope>
+        </dependency>
 
         <!-- Groovy is shipped with GateIn -->
         <dependency>
