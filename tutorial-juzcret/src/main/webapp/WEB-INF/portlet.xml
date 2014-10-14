@@ -16,6 +16,7 @@
        <mime-type>text/html</mime-type>
        <portlet-mode>edit</portlet-mode>
      </supports>
+     <resource-bundle>locale.portlet.juzcret</resource-bundle>
      <portlet-info>
        <title>Secret Application</title>
      </portlet-info>
