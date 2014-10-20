@@ -41,6 +41,7 @@
 
     });
 
+    //Ajax for managing like function
     $(document).on('click.juzu.secret.addLike', '.btn-like', function () {
         var jLike = $(this);
         var jSecret = jLike.closest('.secret');
@@ -57,12 +58,21 @@
         return false;
     });
 
-    $(document).on('click.juzu.secret.addComment', '.btn-popup-comment', function () {
+    //Open the popover for displaying and adding comments
+    $(document).on('click.juzu.secret.openPopover', '.btn-popup-comment', function () {
         var jComment = $(this);
         var jSecret = jComment.closest('.secret');
         jSecret.addClass('open-popover');
     });
 
+    //Close the popover for displaying and adding comments
+    $(document).on('click.juzu.secret.closePopover', '.closePopover', function () {
+        var jComment = $(this);
+        var jSecret = jComment.closest('.secret');
+        jSecret.removeClass('open-popover');
+    });
+
+    //Ajax for managing comment function
     $(document).on('click.juzu.secret.addComment', '.btn-comment', function () {
         var jComment = $(this);
         var jSecret = jComment.closest('.secret');
@@ -83,11 +93,11 @@
                             cList +=
                                 "<div class='media'>" +
                                     "<a class='pull-left' href='http://localhost:8080/portal/intranet/profile/" + elem.userId + "'>" +
-                                        "<img src='https://pu3eia.blu.livefilestore.com/y2p_AtDs2zZybxjt4TnuAS8AM6_ig4OVyYdYf83xMvAm1ZO09VUMEX5cStpy2CHeeqE9XW3LdgEe_KPPdtKVcmYyBsBbmnRm2ngEt4n8DUMeE0/User_01.jpg' alt='avatar'>" +
+                                        "<img src='http://localhost:8080/social-resources/skin/images/ShareImages/UserAvtDefault.png' alt='avatar'>" +
                                     "</a>" +
                                     "<div class='media-body'>" +
                                         "<div>" +
-                                            "<a class='cm-user-name' href='#'>" + elem.userId + "</a> " +
+                                            "<a class='cm-user-name' href='http://localhost:8080/portal/intranet/profile/" + elem.userId + "'>" + elem.userId + "</a> " +
                                             "<span class='cm-time'>" + elem.createdDate + "</span>" +
                                         "</div>" +
                                         "<div class='cm-content'>" + elem.content + "</div>" +

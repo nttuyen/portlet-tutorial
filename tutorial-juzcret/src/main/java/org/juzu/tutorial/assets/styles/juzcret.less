@@ -14,6 +14,15 @@
   @opacity-ie: (@opacity * 100);
   filter: ~"alpha(opacity=@{opacity-ie})";
 }
+
+// Border Radius CSS3
+.border-radius(@border-radius) {
+  -webkit-border-radius: @border-radius;
+  -moz-border-radius: @border-radius;
+  -ms-border-radius: @border-radius; // IE9 only
+  border-radius: @border-radius;
+}
+
 // Transform CSS3
 .transform(@transform) {
   -webkit-transform: @transform;
@@ -127,6 +136,22 @@
       right: -205px;
       width: 500px;
       margin: 0px;
+    }
+    .close {
+      line-height: 16px;
+      padding: 1px 5px;
+      position: absolute;
+      right: 0;
+      top: 0;
+    }
+    .media {
+      > .pull-left {
+        > img {
+          width: 36px;
+          height: 36px;
+          .border-radius(2px);
+        }
+      }
     }
     &:hover, &.open-popover {
       .secret-action {
