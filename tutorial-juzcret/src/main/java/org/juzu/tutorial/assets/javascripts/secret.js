@@ -2,6 +2,11 @@
 
     $(document).ready(function () {
 
+        //Var to know the number of image in the line
+        var counterImg = 0;
+        //Var to know the place taken by previous image in the line
+        var totalWidthLine = 0;
+
         function getRangeRandom(min, max) {
             return Math.ceil(Math.random() * (max - min) + min);
         }
@@ -25,20 +30,11 @@
             return randBoxNum;
         }
 
-        //Var to know the number of image in the line
-        var counterImg = 0;
-        //Var to know the place taken by previous image in the line
-        var totalWidthLine = 0;
-
         //Get all secrets boxes
-        var nums = document.getElementsByClassName("secret-wall-list");
-        var listItem = nums[0].getElementsByTagName("li");
-
-        //Set a random width
-        for (var i = 0; i < listItem.length; i++) {
-            listItem[i].style.width = randSecretBoxWidth() + "%";
-        }
-
+        $('.secret').each(function(idx, listItem) {
+          //Set a random width
+          listItem.style.width = randSecretBoxWidth() + "%";          
+        });
     });
 
     //Ajax for managing like function
