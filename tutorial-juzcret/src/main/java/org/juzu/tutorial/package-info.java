@@ -26,11 +26,6 @@
 @Assets("*")
 package org.juzu.tutorial;
 
-import org.exoplatform.services.jcr.ext.app.SessionProviderService;
-import org.exoplatform.services.jcr.ext.hierarchy.NodeHierarchyCreator;
-import org.juzu.tutorial.services.SecretService;
-import org.juzu.tutorial.services.SecretServiceJCRImpl;
-
 import juzu.plugin.asset.Assets;
 import juzu.plugin.asset.Script;
 import juzu.plugin.asset.Scripts;
@@ -40,4 +35,9 @@ import juzu.plugin.binding.Bindings;
 import juzu.plugin.less4j.Less;
 import juzu.plugin.webjars.WebJar;
 import juzu.plugin.webjars.WebJars;
+
+import org.exoplatform.services.jcr.ext.app.SessionProviderService;
+import org.exoplatform.services.jcr.ext.hierarchy.NodeHierarchyCreator;
+import org.juzu.tutorial.services.SecretService;
+import org.juzu.tutorial.services.SecretServiceJCRImpl;
 

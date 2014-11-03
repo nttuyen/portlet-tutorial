@@ -51,7 +51,7 @@ public class SecretServiceMemImpl implements SecretService {
     secret.setMessage(message);
     secret.setImageURL(imageUrl);
     secret.setCreatedDate(new Date());
-    secretsList.add(secret);
+    getSecrets().add(secret);
   }
 
   public Comment addComment(String secretId, Comment comment) {

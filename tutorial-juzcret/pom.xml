@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>org.juzu.tutorial</groupId>
@@ -83,6 +82,16 @@
           <artifactId>exo.jcr.component.ext</artifactId>
           <version>1.15.x-SNAPSHOT</version>
           <scope>provided</scope>
+          <exclusions>
+              <exclusion>
+                 <groupId>xml-apis</groupId>
+                 <artifactId>xml-apis</artifactId>
+              </exclusion>
+              <exclusion>
+                 <groupId>org.exoplatform.core</groupId>
+                 <artifactId>exo.core.component.document</artifactId>
+              </exclusion>
+           </exclusions>
         </dependency>
 
         <!-- Groovy is shipped with GateIn -->
@@ -117,6 +126,13 @@
 
         <!-- Junit for testing -->
         <dependency>
+          <groupId>org.juzu</groupId>
+          <artifactId>juzu-core</artifactId>
+          <version>1.0.0-cr1</version>
+          <type>test-jar</type>
+          <scope>test</scope>
+        </dependency>
+        <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
             <version>4.10</version>
@@ -134,13 +150,25 @@
             <version>1.0.0-cr1</version>
             <scope>test</scope>
         </dependency>
-
     </dependencies>
 
   <build>
     <finalName>tutorial-juzcret</finalName>
 
-    <plugins>      
+    <plugins> 
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-surefire-plugin</artifactId>
+        <version>2.16</version>
+        <configuration>
+        <systemPropertyVariables>
+          <targetDir>${project.build.directory}</targetDir>
+          <juzu.test.compiler>javac</juzu.test.compiler>
+          <juzu.test.resources.path>${basedir}/src/test/resources</juzu.test.resources.path>
+          <juzu.test.workspace.path>${project.build.directory}/workspace</juzu.test.workspace.path>
+        </systemPropertyVariables>
+        </configuration>
+      </plugin>     
       <plugin>
        <groupId>org.codehaus.gmaven</groupId>
        <artifactId>gmaven-plugin</artifactId>
