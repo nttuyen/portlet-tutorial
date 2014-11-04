@@ -69,9 +69,11 @@ public class JuZcretApplication implements RequestLifeCycle {
   
   public static final String ENABLE_COMMENT = "enableComment";
 
+  private static final String ANONYMOUS = "Anonymous";
+
   @View
   public Response.Content index(RequestContext context) {
-    boolean enableComment = Boolean.parseBoolean(prefs.getValue(ENABLE_COMMENT, "false"));
+    boolean enableComment = Boolean.parseBoolean(prefs.getValue(ENABLE_COMMENT, "true"));
     if (PortletMode.EDIT.equals(context.getProperty(JuzuPortlet.PORTLET_MODE))) {
       return editMode.with().enableComment(enableComment).ok();
     } else {
@@ -86,9 +88,8 @@ public class JuZcretApplication implements RequestLifeCycle {
   
   @Ajax
   @Resource
-  public Response addComment(String secretId, @Mapped @Valid Comment comment, SecurityContext context) {
-    Principal user = context.getUserPrincipal();
-    comment.setUserId(user.getName());    
+  public Response addComment(String secretId, @Mapped @Valid Comment comment, SecurityContext context) {    
+    comment.setUserId(getCurrentUser(context));
     Comment result = secretService.addComment(secretId, comment);
     if (result != null) {
       return Response.ok(new JSONObject(result).toString()).withMimeType("text/json");
@@ -96,12 +97,11 @@ public class JuZcretApplication implements RequestLifeCycle {
       return Response.status(503);
     }
   }
-  
+
   @Ajax
   @Resource
-  public Response addLike(String secretId, SecurityContext context) {
-    Principal user = context.getUserPrincipal();
-    Set<String> likes = secretService.addLike(secretId, user.getName());
+  public Response addLike(String secretId, SecurityContext context) {    
+    Set<String> likes = secretService.addLike(secretId, getCurrentUser(context));
     if (likes != null) {
       return Response.ok(new JSONArray(likes).toString()).withMimeType("text/json");
     } else {
@@ -140,5 +140,14 @@ public class JuZcretApplication implements RequestLifeCycle {
 
   @Override
   public void beginRequest(RequestContext context) {    
+  }
+  
+  private String getCurrentUser(SecurityContext context) {
+    Principal user = context.getUserPrincipal();
+    if (user == null) {
+      return ANONYMOUS;
+    } else {      
+      return user.getName();          
+    }
   }
 }
